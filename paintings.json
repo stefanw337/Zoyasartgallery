@@ -1,0 +1,44 @@
+[
+  {
+    "title": "Painting Title 1",
+    "imageSrc": "p1.jpg",
+    "description": "This is the description of Painting 1.",
+    "status": "For Sale",
+    "date": "2023-07-21"
+  },
+  {
+    "title": "Painting Title 2",
+    "imageSrc": "p1.jpg",
+    "description": "This is the description of Painting 2.",
+    "status": "Not for Sale",
+    "date": "2023-07-15"
+  },
+  {
+    "title": "Painting Title 3",
+    "imageSrc": "p1.jpg",
+    "description": "This is the description of Painting 3.",
+    "status": "Sold",
+    "date": "2023-08-05"
+  },
+  {
+    "title": "Painting Title 4",
+    "imageSrc": "p1.jpg",
+    "description": "This is the description of Painting 4.",
+    "status": "For Sale",
+    "date": "2023-09-10"
+  },
+  {
+    "title": "Painting Title 5",
+    "imageSrc": "p1.jpg",
+    "description": "This is the description of Painting 5.",
+    "status": "Not for Sale",
+    "date": "2023-10-03"
+  },
+  {
+    "title": "Painting Title 6",
+    "imageSrc": "p1.jpg",
+    "description": "This is the description of Painting 6.",
+    "status": "For Sale",
+    "date": "2023-11-20"
+  }
+]
