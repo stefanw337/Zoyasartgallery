@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art Gallery - Duras, France</title>
+    <style>
+        /* ... (same as previous code) ... */
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Art Gallery - Duras, France</h1>
+        <h2>Galerie d'Art - Duras, France</h2>
+    </header>
+
+    <div class="painting-details" id="painting-details">
+        <!-- Painting details will be dynamically generated here -->
+    </div>
+
+    <script>
+        // Function to fetch the individual painting data and display it
+        async function displayPaintingDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const paintingId = urlParams.get('id');
+
+            const response = await fetch('gallery.xml');
+            const xmlData = await response.text();
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xmlData, 'text/xml');
+            const painting = xmlDoc.querySelector(`painting[id="${paintingId}"]`);
+
+            if (painting) {
+                const titleEn = painting.getElementsByTagName('title_en')[0].textContent;
+                const titleFr = painting.getElementsByTagName('title_fr')[0].textContent;
+                const imageUrl = painting.getElementsByTagName('image_url')[0].textContent;
+                const description = painting.getElementsByTagName('description')[0].textContent;
+
+                const paintingDetailsDiv = document.getElementById('painting-details');
+
+                const img = document.createElement('img');
+                img.src = imageUrl;
+                img.alt = titleEn;
+                img.classList.add('painting-image');
+
+                const signDiv = document.createElement('div');
+                signDiv.classList.add('sign');
+                signDiv.textContent = `${titleEn} - ${titleFr}`;
+
+                const descriptionPara = document.createElement('p');
+                descriptionPara.textContent = description;
+
+                paintingDetailsDiv.appendChild(img);
+                paintingDetailsDiv.appendChild(signDiv);
+                paintingDetailsDiv.appendChild(descriptionPara);
+            } else {
+                // Handle error if painting ID is not found
+                const errorPara = document.createElement('p');
+                errorPara.textContent = 'Sorry, the requested painting could not be found.';
+                document.body.appendChild(errorPara);
+            }
+        }
+
+        // Invoke the function to display the painting details when the page loads
+        displayPaintingDetails();
+    </script>
+</body>
+</html>
