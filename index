@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art Gallery - Duras, France</title>
+    <style>
+        /* ... (same as previous code) ... */
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Art Gallery - Duras, France</h1>
+        <h2>Galerie d'Art - Duras, France</h2>
+    </header>
+
+    <div class="gallery" id="gallery-container">
+        <!-- Paintings will be dynamically generated here -->
+    </div>
+
+    <script>
+        // Function to fetch XML data and create gallery items
+        async function createGalleryItems() {
+            const galleryContainer = document.getElementById('gallery-container');
+            const response = await fetch('gallery.xml');
+            const xmlData = await response.text();
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xmlData, 'text/xml');
+            const paintings = xmlDoc.getElementsByTagName('painting');
+
+            for (const painting of paintings) {
+                const titleEn = painting.getElementsByTagName('title_en')[0].textContent;
+                const titleFr = painting.getElementsByTagName('title_fr')[0].textContent;
+                const imageUrl = painting.getElementsByTagName('image_url')[0].textContent;
+
+                const paintingDiv = document.createElement('a');
+                paintingDiv.href = 'painting.html?id=' + painting.getAttribute('id');
+                paintingDiv.classList.add('painting');
+
+                const img = document.createElement('img');
+                img.src = imageUrl;
+                img.alt = titleEn;
+
+                const signDiv = document.createElement('div');
+                signDiv.classList.add('sign');
+                signDiv.textContent = `${titleEn} - ${titleFr}`;
+
+                paintingDiv.appendChild(img);
+                paintingDiv.appendChild(signDiv);
+                galleryContainer.appendChild(paintingDiv);
+            }
+        }
+
+        // Invoke the function to create the gallery items when the page loads
+        createGalleryItems();
+    </script>
+</body>
+</html>
